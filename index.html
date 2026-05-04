@@ -1,1443 +1,692 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kyle Chamberlain — Resume</title>
-    <style>
-      @font-face {
-        font-family: "DepartureMono";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2")
-          format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-    </style>
-    <style>
-      /* ── Reset & Base ── */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyle Chamberlain — Resume</title>
+  <style>
+    @font-face {
+      font-family: 'DepartureMono';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2409-1@1.0/DepartureMono-Regular.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg:         #0a0c0f;
+      --bg2:        #0f1218;
+      --bg3:        #141820;
+      --border:     #1e2530;
+      --border2:    #253040;
+      --green:      #00ff88;
+      --green2:     #00cc66;
+      --green-dim:  #004422;
+      --cyan:       #00d4ff;
+      --yellow:     #ffd700;
+      --red:        #ff4444;
+      --text:       #c8d8c8;
+      --text-dim:   #5a7060;
+      --text-faint: #2a3530;
+      --font:       'DepartureMono', 'Departure Mono', ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace;
+      --radius:     2px;
+      --gap:        1.5rem;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Ambient glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 40%;
+      background: radial-gradient(ellipse, rgba(0,255,136,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s, text-shadow 0.15s;
+    }
+    a:hover {
+      color: var(--green);
+      text-shadow: 0 0 8px rgba(0,255,136,0.5);
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Header ── */
+    .header {
+      border: 1px solid var(--border2);
+      background: var(--bg2);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green), var(--cyan), var(--green), transparent);
+    }
+
+    .header::after {
+      content: attr(data-initials);
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 5rem;
+      color: var(--text-faint);
+      letter-spacing: -0.05em;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .header-prompt {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .header-prompt::before { content: '$'; color: var(--green); }
+    .cursor {
+      display: inline-block;
+      width: 0.55em;
+      height: 1.1em;
+      background: var(--green);
+      vertical-align: text-bottom;
+      animation: blink 1.2s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .name {
+      font-size: 2.2rem;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(0,255,136,0.35), 0 0 60px rgba(0,255,136,0.15);
+      margin-bottom: 0.4rem;
+    }
+
+    .label {
+      font-size: 0.95rem;
+      color: var(--cyan);
+      margin-bottom: 1.25rem;
+      font-weight: 400;
+    }
+
+    .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+    .contact-line a { color: var(--text-dim); }
+    .contact-line a:hover { color: var(--green); }
+    .contact-sep { color: var(--border2); }
+
+    .profiles-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .profile-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border2);
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      transition: border-color 0.15s, background 0.15s;
+      color: var(--text-dim);
+    }
+    .profile-link:hover {
+      border-color: var(--green);
+      background: rgba(0,255,136,0.05);
+      color: var(--green);
+      text-shadow: none;
+    }
+    .profile-network { color: var(--green); margin-right: 0.15rem; }
+    .profile-username { color: inherit; }
+
+    .summary-block {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* ── Sections ── */
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .section-marker {
+      color: var(--green);
+      
+      font-size: 0.8rem;
+    }
+    .section-header h2 {
+      font-size: 0.8rem;
+      
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--green);
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border2), transparent);
+    }
+
+    /* ── Entries ── */
+    .entry {
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      margin-bottom: 0.6rem;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .entry::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--green-dim);
+      transition: background 0.2s;
+    }
+    .entry:hover {
+      border-color: var(--border2);
+      background: var(--bg3);
+    }
+    .entry:hover::before {
+      background: var(--green);
+    }
+    .entry.compact { padding: 0.75rem 1.25rem; }
+
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-bottom: 0.2rem;
+    }
+    .entry-title {
+      color: #eefaee;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+    .entry-title a { color: inherit; }
+    .entry-title a:hover { color: var(--green); }
+    .entry-meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .entry-sub {
+      font-size: 0.82rem;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .entry-url {
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .entry-summary {
+      font-size: 0.83rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 0.5rem;
+    }
+    .entry-summary p { margin-bottom: 0.5rem; }
+    .entry-summary p:last-child { margin-bottom: 0; }
+    .entry-summary ul, .entry-summary ol {
+      margin-left: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .entry-summary li { margin-bottom: 0.25rem; }
+    .entry-summary code {
+      font-family: var(--font);
+      background: rgba(0,255,136,0.1);
+      padding: 0.1rem 0.3rem;
+      color: var(--green);
+    }
+    .entry-summary a,
+    .highlights a,
+    .ref-block a {
+      display: inline;
+      vertical-align: baseline;
+      word-break: break-word;
+    }
+    .dim { color: var(--text-dim); }
+
+    /* Highlights */
+    .highlights {
+      list-style: none;
+      margin-top: 0.35rem;
+    }
+    .highlights li {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--text);
+      padding: 0.15rem 0;
+    }
+    .highlights li p { margin: 0; }
+    .highlight-text {
+      flex: 1;
+    }
+    .bullet { color: var(--green); flex-shrink: 0; }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      background: rgba(0,255,136,0.07);
+      border: 1px solid rgba(0,255,136,0.2);
+      color: var(--green2);
+      font-size: 0.75rem;
+      padding: 0.1rem 0.45rem;
+      margin: 0.15rem 0.1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .courses { font-size: 0.8rem; margin-top: 0.4rem; }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+    }
+    .skill-block {
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 0.7rem 1rem;
+      transition: border-color 0.2s;
+    }
+    .skill-block:hover { border-color: var(--border2); }
+    .skill-name {
+      font-size: 0.85rem;
+      color: #eefaee;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.25rem;
+    }
+    .skill-level {
+      font-size: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+    .skill-level[data-level="master"],
+    .skill-level[data-level="expert"] { color: var(--green); }
+    .skill-level[data-level="advanced"] { color: var(--cyan); }
+    .skill-level[data-level="intermediate"] { color: var(--yellow); }
+    .skill-level[data-level="beginner"] { color: var(--text-dim); }
+
+    /* Inline lists */
+    .inline-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .lang-item, .interest-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      font-size: 0.83rem;
+    }
+    .lang-name { color: #e8f0e8;  }
+    .lang-fluency { font-size: 0.75rem; }
+
+    /* References */
+    .ref-block {
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.6rem;
+    }
+    .ref-block blockquote {
+      font-size: 0.83rem;
+      color: var(--text);
+      font-style: italic;
+      line-height: 1.65;
+      border-left: 2px solid var(--green-dim);
+      padding-left: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .ref-block blockquote p { margin-bottom: 0.4rem; }
+    .ref-block blockquote p:last-child { margin-bottom: 0; }
+    .ref-block blockquote ul, .ref-block blockquote ol {
+      margin-left: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+    .ref-block blockquote code {
+      font-family: var(--font);
+      background: rgba(0,255,136,0.1);
+      padding: 0.1rem 0.3rem;
+      color: var(--green);
+    }
+    .ref-name {
+      font-size: 0.78rem;
+      color: var(--cyan);
+      text-align: right;
+    }
+
+    /* Score */
+    .score {
+      color: var(--yellow);
+      font-size: 0.75rem;
+      border: 1px solid rgba(255,215,0,0.2);
+      padding: 0 0.35rem;
+    }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #000; }
+      body::before, body::after { display: none; }
       :root {
-        --bg: #0a0c0f;
-        --bg2: #0f1218;
-        --bg3: #141820;
-        --border: #1e2530;
-        --border2: #253040;
-        --green: #00ff88;
-        --green2: #00cc66;
-        --green-dim: #004422;
-        --cyan: #00d4ff;
-        --yellow: #ffd700;
-        --red: #ff4444;
-        --text: #c8d8c8;
-        --text-dim: #5a7060;
-        --text-faint: #2a3530;
-        --font: "DepartureMono", "Departure Mono", ui-monospace, "Cascadia Code",
-          "SF Mono", Consolas, monospace;
-        --radius: 2px;
-        --gap: 1.5rem;
+        --bg: #fff; --bg2: #f5f5f5; --bg3: #eee;
+        --border: #ccc; --border2: #bbb;
+        --green: #008844; --green2: #006633;
+        --cyan: #006688; --text: #111; --text-dim: #555;
+        --text-faint: #ddd;
       }
+      .header::after { display: none; }
+      .entry:hover { border-color: var(--border); background: var(--bg2); }
+      a { color: #006688; }
+    }
 
-      html {
-        font-size: 16px;
-      }
+    @media (max-width: 600px) {
+      .header { padding: 1.5rem; }
+      .header::after { display: none; }
+      .name { font-size: 1.8rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
 
-      body {
-        font-family: var(--font);
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.6;
-        min-height: 100vh;
-        position: relative;
-        overflow-x: hidden;
-      }
-
-      /* Scanline overlay */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 2px,
-          rgba(0, 0, 0, 0.03) 2px,
-          rgba(0, 0, 0, 0.03) 4px
-        );
-        pointer-events: none;
-        z-index: 999;
-      }
-
-      /* Ambient glow */
-      body::after {
-        content: "";
-        position: fixed;
-        top: -20%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        height: 40%;
-        background: radial-gradient(
-          ellipse,
-          rgba(0, 255, 136, 0.04) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      a {
-        color: var(--cyan);
-        text-decoration: none;
-        transition:
-          color 0.15s,
-          text-shadow 0.15s;
-      }
-      a:hover {
-        color: var(--green);
-        text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
-      }
-
-      /* ── Layout ── */
-      .page {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem 4rem;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* ── Header ── */
-      .header {
-        border: 1px solid var(--border2);
-        background: var(--bg2);
-        padding: 2rem 2.5rem;
-        margin-bottom: 2rem;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .header::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--green),
-          var(--cyan),
-          var(--green),
-          transparent
-        );
-      }
-
-      .header::after {
-        content: attr(data-initials);
-        position: absolute;
-        right: 2rem;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 5rem;
-        color: var(--text-faint);
-        letter-spacing: -0.05em;
-        line-height: 1;
-        pointer-events: none;
-        user-select: none;
-      }
-
-      .header-prompt {
-        color: var(--text-dim);
-        font-size: 0.85rem;
-        margin-bottom: 0.75rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .header-prompt::before {
-        content: "$";
-        color: var(--green);
-      }
-      .cursor {
-        display: inline-block;
-        width: 0.55em;
-        height: 1.1em;
-        background: var(--green);
-        vertical-align: text-bottom;
-        animation: blink 1.2s step-end infinite;
-      }
-      @keyframes blink {
-        50% {
-          opacity: 0;
-        }
-      }
-
-      .name {
-        font-size: 2.2rem;
-        color: var(--green);
-        letter-spacing: 0.08em;
-        line-height: 1;
-        text-shadow:
-          0 0 30px rgba(0, 255, 136, 0.35),
-          0 0 60px rgba(0, 255, 136, 0.15);
-        margin-bottom: 0.4rem;
-      }
-
-      .label {
-        font-size: 0.95rem;
-        color: var(--cyan);
-        margin-bottom: 1.25rem;
-        font-weight: 400;
-      }
-
-      .contact-line {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 1.5rem;
-        font-size: 0.8rem;
-        color: var(--text-dim);
-        margin-bottom: 0.75rem;
-      }
-      .contact-line a {
-        color: var(--text-dim);
-      }
-      .contact-line a:hover {
-        color: var(--green);
-      }
-      .contact-sep {
-        color: var(--border2);
-      }
-
-      .profiles-line {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-top: 0.75rem;
-      }
-      .profile-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0;
-        border: 1px solid var(--border2);
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-        transition:
-          border-color 0.15s,
-          background 0.15s;
-        color: var(--text-dim);
-      }
-      .profile-link:hover {
-        border-color: var(--green);
-        background: rgba(0, 255, 136, 0.05);
-        color: var(--green);
-        text-shadow: none;
-      }
-      .profile-network {
-        color: var(--green);
-        margin-right: 0.15rem;
-      }
-      .profile-username {
-        color: inherit;
-      }
-
-      .summary-block {
-        margin-top: 1.25rem;
-        padding-top: 1.25rem;
-        border-top: 1px solid var(--border);
-        font-size: 0.88rem;
-        color: var(--text);
-        line-height: 1.7;
-        max-width: 600px;
-      }
-
-      /* ── Sections ── */
-      .section {
-        margin-bottom: 2rem;
-      }
-
-      .section-header {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 1rem;
-      }
-      .section-marker {
-        color: var(--green);
-
-        font-size: 0.8rem;
-      }
-      .section-header h2 {
-        font-size: 0.8rem;
-
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--green);
-      }
-      .section-line {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, var(--border2), transparent);
-      }
-
-      /* ── Entries ── */
-      .entry {
-        padding: 1rem 1.25rem;
-        border: 1px solid var(--border);
-        background: var(--bg2);
-        margin-bottom: 0.6rem;
-        position: relative;
-        transition:
-          border-color 0.2s,
-          background 0.2s;
-      }
-      .entry::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: var(--green-dim);
-        transition: background 0.2s;
-      }
-      .entry:hover {
-        border-color: var(--border2);
-        background: var(--bg3);
-      }
-      .entry:hover::before {
-        background: var(--green);
-      }
-      .entry.compact {
-        padding: 0.75rem 1.25rem;
-      }
-
-      .entry-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        flex-wrap: wrap;
-        gap: 0.25rem;
-        margin-bottom: 0.2rem;
-      }
-      .entry-title {
-        color: #eefaee;
-        font-size: 0.95rem;
-        letter-spacing: 0.02em;
-      }
-      .entry-title a {
-        color: inherit;
-      }
-      .entry-title a:hover {
-        color: var(--green);
-      }
-      .entry-meta {
-        font-size: 0.75rem;
-        color: var(--text-dim);
-        white-space: nowrap;
-      }
-      .entry-sub {
-        font-size: 0.82rem;
-        color: var(--cyan);
-        margin-bottom: 0.5rem;
-      }
-      .entry-url {
-        font-size: 0.75rem;
-        margin-bottom: 0.5rem;
-      }
-      .entry-summary {
-        font-size: 0.83rem;
-        color: var(--text);
-        line-height: 1.65;
-        margin-bottom: 0.5rem;
-      }
-      .entry-summary p {
-        margin-bottom: 0.5rem;
-      }
-      .entry-summary p:last-child {
-        margin-bottom: 0;
-      }
-      .entry-summary ul,
-      .entry-summary ol {
-        margin-left: 1.25rem;
-        margin-bottom: 0.5rem;
-      }
-      .entry-summary li {
-        margin-bottom: 0.25rem;
-      }
-      .entry-summary code {
-        font-family: var(--font);
-        background: rgba(0, 255, 136, 0.1);
-        padding: 0.1rem 0.3rem;
-        color: var(--green);
-      }
-      .entry-summary a,
-      .highlights a,
-      .ref-block a {
-        display: inline;
-        vertical-align: baseline;
-        word-break: break-word;
-      }
-      .dim {
-        color: var(--text-dim);
-      }
-
-      /* Highlights */
-      .highlights {
-        list-style: none;
-        margin-top: 0.35rem;
-      }
-      .highlights li {
-        display: flex;
-        gap: 0.5rem;
-        font-size: 0.82rem;
-        color: var(--text);
-        padding: 0.15rem 0;
-      }
-      .highlights li p {
-        margin: 0;
-      }
-      .highlight-text {
-        flex: 1;
-      }
-      .bullet {
-        color: var(--green);
-        flex-shrink: 0;
-      }
-
-      /* Tags */
-      .tag {
-        display: inline-block;
-        background: rgba(0, 255, 136, 0.07);
-        border: 1px solid rgba(0, 255, 136, 0.2);
-        color: var(--green2);
-        font-size: 0.75rem;
-        padding: 0.1rem 0.45rem;
-        margin: 0.15rem 0.1rem;
-        letter-spacing: 0.03em;
-      }
-
-      .courses {
-        font-size: 0.8rem;
-        margin-top: 0.4rem;
-      }
-
-      /* Skills */
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 0.6rem;
-      }
-      .skill-block {
-        border: 1px solid var(--border);
-        background: var(--bg2);
-        padding: 0.7rem 1rem;
-        transition: border-color 0.2s;
-      }
-      .skill-block:hover {
-        border-color: var(--border2);
-      }
-      .skill-name {
-        font-size: 0.85rem;
-        color: #eefaee;
-        letter-spacing: 0.03em;
-        margin-bottom: 0.25rem;
-      }
-      .skill-level {
-        font-size: 0.75rem;
-        margin-bottom: 0.35rem;
-      }
-      .skill-level[data-level="master"],
-      .skill-level[data-level="expert"] {
-        color: var(--green);
-      }
-      .skill-level[data-level="advanced"] {
-        color: var(--cyan);
-      }
-      .skill-level[data-level="intermediate"] {
-        color: var(--yellow);
-      }
-      .skill-level[data-level="beginner"] {
-        color: var(--text-dim);
-      }
-
-      /* Inline lists */
-      .inline-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-      }
-      .lang-item,
-      .interest-item {
-        display: flex;
-        align-items: baseline;
-        gap: 0.35rem;
-        font-size: 0.83rem;
-      }
-      .lang-name {
-        color: #e8f0e8;
-      }
-      .lang-fluency {
-        font-size: 0.75rem;
-      }
-
-      /* References */
-      .ref-block {
-        border: 1px solid var(--border);
-        background: var(--bg2);
-        padding: 1rem 1.25rem;
-        margin-bottom: 0.6rem;
-      }
-      .ref-block blockquote {
-        font-size: 0.83rem;
-        color: var(--text);
-        font-style: italic;
-        line-height: 1.65;
-        border-left: 2px solid var(--green-dim);
-        padding-left: 1rem;
-        margin-bottom: 0.5rem;
-      }
-      .ref-block blockquote p {
-        margin-bottom: 0.4rem;
-      }
-      .ref-block blockquote p:last-child {
-        margin-bottom: 0;
-      }
-      .ref-block blockquote ul,
-      .ref-block blockquote ol {
-        margin-left: 1.25rem;
-        margin-bottom: 0.4rem;
-      }
-      .ref-block blockquote code {
-        font-family: var(--font);
-        background: rgba(0, 255, 136, 0.1);
-        padding: 0.1rem 0.3rem;
-        color: var(--green);
-      }
-      .ref-name {
-        font-size: 0.78rem;
-        color: var(--cyan);
-        text-align: right;
-      }
-
-      /* Score */
-      .score {
-        color: var(--yellow);
-        font-size: 0.75rem;
-        border: 1px solid rgba(255, 215, 0, 0.2);
-        padding: 0 0.35rem;
-      }
-
-      /* Print */
-      @media print {
-        body {
-          background: #fff;
-          color: #000;
-        }
-        body::before,
-        body::after {
-          display: none;
-        }
-        :root {
-          --bg: #fff;
-          --bg2: #f5f5f5;
-          --bg3: #eee;
-          --border: #ccc;
-          --border2: #bbb;
-          --green: #008844;
-          --green2: #006633;
-          --cyan: #006688;
-          --text: #111;
-          --text-dim: #555;
-          --text-faint: #ddd;
-        }
-        .header::after {
-          display: none;
-        }
-        .entry:hover {
-          border-color: var(--border);
-          background: var(--bg2);
-        }
-        a {
-          color: #006688;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .header {
-          padding: 1.5rem;
-        }
-        .header::after {
-          display: none;
-        }
-        .name {
-          font-size: 1.8rem;
-        }
-        .skills-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <!-- Header -->
-      <header class="header" data-initials="KC">
-        <div class="header-prompt">whoami<span class="cursor"></span></div>
-        <div class="name">Kyle Chamberlain</div>
-        <div class="label">Software Engineer</div>
-        <div class="contact-line">
-          <a href="mailto:kylechamberlain@proton.me"
-            >kylechamberlain@proton.me</a
-          >
-          <span>(614) 296-3489</span>
-
-          <span>Columbus, OH, US</span>
-        </div>
-        <div class="profiles-line">
-          <a
-            href="https://github.com/koleok"
-            class="profile-link"
-            target="_blank"
-            rel="noopener"
-            ><span class="profile-network">Github</span
-            ><span class="profile-username">/koleok</span></a
-          ><a
-            href="https://www.linkedin.com/in/koleok"
-            class="profile-link"
-            target="_blank"
-            rel="noopener"
-            ><span class="profile-network">Linkedin</span
-            ><span class="profile-username">/koleok</span></a
-          ><a
-            href="https://t.me/koleokx"
-            class="profile-link"
-            target="_blank"
-            rel="noopener"
-            ><span class="profile-network">Telegram</span
-            ><span class="profile-username">/koleokx</span></a
-          ><a
-            href="https://kylechamberlain.youcanbook.me"
-            class="profile-link"
-            target="_blank"
-            rel="noopener"
-            ><span class="profile-network">Booking</span
-            ><span class="profile-username"
-              >/kylechamberlain.youcanbook.me</span
-            ></a
-          >
-        </div>
-        <div class="summary-block">
-          <p>
-            Staff software engineer building AI-native products — knowledge
-            graphs, RAG systems, and intelligent search. Designs and ships TS
-            SDKs, high-scale data pipelines, and internal tooling that
-            supercharges developer experience.
-          </p>
-        </div>
-      </header>
-
-      <!-- Main content -->
-
-      <section class="section">
-        <div class="section-header">
-          <span class="section-marker">~/</span>
-          <h2>Work Experience</h2>
-          <span class="section-line"></span>
-        </div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Mar 2025 — Present</span>
-          </div>
-          <div class="entry-sub">Staff Software Engineer (Applied AI)</div>
-          <div class="entry-url">
-            <a href="https://later.com" target="_blank" rel="noopener"
-              >https://later.com</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Build
-              <a
-                href="https://www.prnewswire.com/news-releases/introducing-later-edgeai-the-industrys-most-advanced-predictive-intelligence-solution-302596310.html"
-                >EdgeAi</a
-              >
-              flagship influencer marketing tool from scratch
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Lead AI usage strategy, reference architecture, and product
-                  design for AI tooling that spans the surface area of Later.com
-                  services
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Designed and built enterprise knowledge graph system with
-                  high-scale parallel ingest that runs 10x faster than systems
-                  of it's kind and is drastically cheaper to run
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Designed and built advanced search and applied AI service
-                  automation on top of novel knowledge graph system
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Jun 2016 — Present</span>
-          </div>
-          <div class="entry-sub">Partner / Engineer</div>
-          <div class="entry-url">
-            <a href="https://modweb.io" target="_blank" rel="noopener"
-              >https://modweb.io</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Mentor, design, implement complex systems for a variety of
-              clients, also hands-on manage remote teams
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Design and implement
-                  <a
-                    href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation"
-                    >RAG</a
-                  >
-                  system that consumes many datasources for large organization,
-                  access sold as subscription to both data providers and chat
-                  consumers
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Design and implement slack
-                  <a
-                    href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation"
-                    >RAG</a
-                  >
-                  chatbots that pull augmentation data from git history, slack
-                  conversations, and SDK documentation
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Design and implement batch processing / event sourcing
-                  pipeline to address show-stopping scalability problems at
-                  cyber security startup which unlocked new clients and revenue
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Succesfully migrated established property management firm from
-                  a legacy .NET monolith to graphql orchestrated services with
-                  standalone web app, react-native app, and sms chat bot client
-                  (amazon lex)
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Technologies: JS/TS, Graphql, Node.js, Python, React, Redux,
-                  AWS, <a href="https://aws.amazon.com/lex/">Amazon Lex</a>,
-                  <a href="https://www.twilio.com/">Twilio</a>,
-                  <a href="https://aws.amazon.com/kinesis/">Amazon Kinesis</a>
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Clients include: Moody Analytics, gloo.us, The United Nations,
-                  A.Anthony Corp and many MVP mobile and web products for early
-                  stage startups
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Sep 2024 — Mar 2025</span>
-          </div>
-          <div class="entry-sub">Staff Software Engineer</div>
-          <div class="entry-url">
-            <a href="https://ephemerahq.com" target="_blank" rel="noopener"
-              >https://ephemerahq.com</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Build <a href="https://converse.xyz/">Converse</a> the flagship
-              xmtp reference application, recently aquired by ephemera.
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Redesigned Converse app's auth system to use asymetric device
-                  signature strategy and platform app integrity checks
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>Built transaction simulation backend for Converse</p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Aug 2023 — Sep 2024</span>
-          </div>
-          <div class="entry-sub">Founding Staff Engineer</div>
-          <div class="entry-url">
-            <a href="https://privy.io" target="_blank" rel="noopener"
-              >https://privy.io</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Built SDKs from scratch that 12x'd revenue, and brought the Privy
-              toolset to a new class of developers
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>Designed, built, and shipped Expo SDK</p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>Designed, built, and shipped Swift SDK</p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Worked closely with high profile customers on complex
-                  integrations
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Raised engineering bar by establishing testing practices and
-                  crafting world class internal DX
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Technologies: React, Typescript, Node, React native / expo,
-                  Postgres, Ethereum, Solana, vercel
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Apr 2022 — Aug 2023</span>
-          </div>
-          <div class="entry-sub">Founding Principal Engineer</div>
-          <div class="entry-url">
-            <a href="https://heir.app" target="_blank" rel="noopener"
-              >https://heir.app</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Work closely with product and mentor small team of engineers in
-              planning / architecture / and development of a solana NFT based
-              <a href="https://heir.app">fan engagement platform.</a> founded by
-              Jeffrey Michael Jordan and backed by Michael Jordan / Thrive /
-              Tiger Global
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>Take ownership of existing web app architecture</p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Directly oversee product integrations with magic eden,
-                  moonpay, fortress api, and solana labs
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Technologies: React, Typescript, Node, React native / expo,
-                  Postgres, serverless on AWS, Solana network, vercel,
-                  contentful / payload CMS, magic.link auth
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Oct 2020 — Apr 2022</span>
-          </div>
-          <div class="entry-sub">Lead Senior Engineer</div>
-          <div class="entry-url">
-            <a href="https://filevine.com" target="_blank" rel="noopener"
-              >https://filevine.com</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Lead a team in the planning / design / implementation of
-              customizable dashboard feature in flagship
-              <a href="https://app.filevine.com">filevine product</a>
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Design multi tenant compatible project architecture and seek
-                  stakeholder consensus
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Manage team of api, ui, design and infrastructure specialists
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Implement microservice API and pioneer org usage of
-                  <a href="https://micro-frontends.org/">micro-frontends</a>
-                  with a standalone <a href="https://svelte.dev/">Svelte</a> app
-                  rendered into an existing legacy monolith
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Take ownership of both internal and user facing business
-                  intelligence products
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Technologies: Typescript, Node, C#/.NET, Graphql,
-                  <a href="https://wundergraph.com/">Wundergraph</a>, Python,
-                  Svelte, <a href="https://xstate.js.org/docs/">Xstate</a>, AWS
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Jan 2019 — Oct 2020</span>
-          </div>
-          <div class="entry-sub">Senior Engineer</div>
-          <div class="entry-url">
-            <a href="https://www.nagarro.com/en" target="_blank" rel="noopener"
-              >https://www.nagarro.com/en</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>Mentor developers, contribute expertise to system design</p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Work exclusively for
-                  <a href="https://www.rms.com">RMS</a> building
-                  <a href="https://www.rms.com/risk-intelligence/exposureiq"
-                    >ExposureIQ</a
-                  >, a platform for risk portfolio analysts
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Build on and integrate a Java GraphQl backend which stitched
-                  together a vast list of microservices across org ecosystem
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Technologies: JavaScript, Java, Groovy, Graphql, Node.js,
-                  React, Redux, Ramda, AWS
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Oct 2015 — Sep 2016</span>
-          </div>
-          <div class="entry-sub">Software Engineer</div>
-          <div class="entry-url">
-            <a href="https://oliveai.com" target="_blank" rel="noopener"
-              >https://oliveai.com</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Build and support large scale suite of production apps used by
-              hospital registrars to check patients in and reconcile there
-              identity against past duplicates. Technologies: JavaScript, Java,
-              PHP, Graphql, OrientDB, MongoDB, MySQL, Node.js, AngularJs, React,
-              React-Native, Cordova, Redux, Ramda, D3, Spring framework.
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>work on flagship waiting room queue product</p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  work on several internal tools for analytics and user
-                  management
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  experimental work with custom drivers for fingerprint reader
-                  hardware
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Jan 2014 — Oct 2015</span>
-          </div>
-          <div class="entry-sub">Lead Software Engineer</div>
-          <div class="entry-url">
-            <a href="https://airwavesinc.com" target="_blank" rel="noopener"
-              >https://airwavesinc.com</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Build and support internal software using for shipping products on
-              production floor with 50+ employees. Accomplished via API calls to
-              saas services, low level label and barcode generation /
-              cryptology, massively verbose logging, programmatic print driver
-              management, notification APIs (slack, twilio, trello, email) and
-              more. Technologies: C#, JavaScript, SQL, MongoDB, Meteor, Node.js,
-              AngularJs, KnockoutJs, fabricJs,, NET ecosystem, LINQ,
-              underscore/lodash, MsSQL, SAP
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Build and support async web-services to
-                  aggregate/transform/redistribute/monitor order data coming
-                  from various ecommerce endpoints
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Build and support automation for in-house artists to speed art
-                  creation and personalized art processing using
-                  imagemagick/graphicsmagick and Adobe COM libraries for
-                  Illustrator and Photoshop.
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Build and support plugin fulfilment apps for ecommerce
-                  platforms like Shopify and Magento that support product and
-                  customer CRUD operations, product data translation, charge and
-                  deplete billing systems, and automated order fulfilment
-                  workflows
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Apr 2012 — Jan 2014</span>
-          </div>
-          <div class="entry-sub">Engineer</div>
-          <div class="entry-url">
-            <a href="https://www.darifill.com" target="_blank" rel="noopener"
-              >https://www.darifill.com</a
-            >
-          </div>
-          <div class="entry-summary">
-            <p>
-              Working with small team (6 engineers) to create and support large
-              scale automated filling and packaging machines for the dairy
-              industry. Technologies: C#, C++, VB.NET, JavaScript, Allen Bradley
-              family of products, Visual Studio, Excel, Solidworks, MySQL,
-              Microsoft Projects, Machine automation controls, Gantt project
-              management
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Build controls software and extensive documentation for
-                  machines
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Design and maintain CRM system to track and query customer
-                  interactions, bug fixes, mechanical problems resolutions, and
-                  field service history
-                </p></span
-              >
-            </li>
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Extensive 3d modeling and fabrication ready drafting with
-                  Solidworks
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title"></span>
-            <span class="entry-meta">Apr 2009 — May 2011</span>
-          </div>
-          <div class="entry-sub">Systems Designer</div>
-
-          <div class="entry-summary">
-            <p>
-              Design control room racks for thermal efficiency and minimized
-              current consumption. Technologies: C, proprietary OEM languages,
-              AutoCad, networking tools, IR programming, Residential and
-              Commercial home automation, whole estate
-            </p>
-          </div>
-          <ul class="highlights">
-            <li>
-              <span class="bullet">▸</span
-              ><span class="highlight-text"
-                ><p>
-                  Develop proprietary motion tracking and logging software for
-                  security systems based on common video input and OpenCV
-                  libraries
-                </p></span
-              >
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <span class="section-marker">~/</span>
-          <h2>Education</h2>
-          <span class="section-line"></span>
-        </div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <span class="entry-title">SAIC</span>
-            <span class="entry-meta">May 2007 — May 2011</span>
-          </div>
-          <div class="entry-sub">
-            BFA
-            <span class="dim"
-              >in Programming, digital circuit design, fabrication</span
-            >
-          </div>
-          <div class="courses">
-            Courses:
-            <span class="tag"
-              >Taught programming, and digital circuit design courses</span
-            ><span class="tag"
-              >Oversaw operation for robotics/kinetics lab and machine
-              shop</span
-            >
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <span class="section-marker">~/</span>
-          <h2>Skills</h2>
-          <span class="section-line"></span>
-        </div>
-        <div class="skills-grid">
-          <div class="skill-block">
-            <div class="skill-name">Applied AI</div>
-            <div class="skill-level" data-level="master">Master</div>
-            <div class="skill-tags">
-              <span class="tag">knowledge graph</span
-              ><span class="tag">agentic tooling</span
-              ><span class="tag">vector search</span>
-            </div>
-          </div>
-          <div class="skill-block">
-            <div class="skill-name">Rust</div>
-            <div class="skill-level" data-level="advanced">Advanced</div>
-            <div class="skill-tags">
-              <span class="tag">embedded</span
-              ><span class="tag">performance</span>
-            </div>
-          </div>
-          <div class="skill-block">
-            <div class="skill-name">TS/JS Node/Browser/Edge</div>
-            <div class="skill-level" data-level="master">Master</div>
-            <div class="skill-tags">
-              <span class="tag">typescript</span
-              ><span class="tag">javscript</span>
-            </div>
-          </div>
-          <div class="skill-block">
-            <div class="skill-name">React/Svelte</div>
-            <div class="skill-level" data-level="master">Master</div>
-            <div class="skill-tags">
-              <span class="tag">typescript</span
-              ><span class="tag">frontend</span
-              ><span class="tag">javscript</span><span class="tag">html</span
-              ><span class="tag">css</span>
-            </div>
-          </div>
-          <div class="skill-block">
-            <div class="skill-name">Software Project Management</div>
-            <div class="skill-level" data-level="advanced">Advanced</div>
-            <div class="skill-tags">
-              <span class="tag">Architecture</span
-              ><span class="tag">Remote teams</span
-              ><span class="tag">Planning</span>
-            </div>
-          </div>
-          <div class="skill-block">
-            <div class="skill-name">Distributed Systems</div>
-            <div class="skill-level" data-level="master">Master</div>
-            <div class="skill-tags">
-              <span class="tag">queue</span><span class="tag">CQRS</span
-              ><span class="tag">microservices</span
-              ><span class="tag">dsl</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <span class="section-marker">~/</span>
-          <h2>Interests</h2>
-          <span class="section-line"></span>
-        </div>
-        <div class="inline-list">
-          <span class="interest-item"
-            >Music
-            <span class="dim"
-              >[score composition, song writing, plays 20+ musical
-              instruments]</span
-            ></span
-          ><span class="interest-item"
-            >Alternative investing
-            <span class="dim"
-              >[developing of trading algorithms, retail currency/commodity
-              trading, real estate, options trading]</span
-            ></span
-          ><span class="interest-item"
-            >All things DIY fabrication
-            <span class="dim"
-              >[cnc, laser cutters, woodworking, machining]</span
-            ></span
-          ><span class="interest-item"
-            >Long distance hiking
-            <span class="dim">[Pacific crest trail]</span></span
-          >
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <span class="section-marker">~/</span>
-          <h2>References</h2>
-          <span class="section-line"></span>
-        </div>
-        <div class="ref-block">
-          <blockquote>
-            <p>
-              I worked directly with Kyle on a complex, high priority client
-              project for 1.5 years. Kyle always showed great attention to
-              detail, patience, and initiative in working through complex issues
-              and often unclear requirements. Kyle has extensive experience and
-              a very well rounded skillset. I wouldn't hesitate to recommend
-              Kyle if you are looking to build a high performing software
-              development team.
-            </p>
-          </blockquote>
-          <div class="ref-name">
-            <p><a href="https://www.linkedin.com/in/evanhein">Evan Hein</a></p>
-          </div>
-        </div>
-        <div class="ref-block">
-          <blockquote>
-            <p>Two impressions I got about Kyle:</p>
-            <ol>
-              <li>
-                His knowledge is extensive. We were often discussing technical
-                aspects of the project that require a broad understanding of
-                various technologies and practices, both front-end and back-end,
-                theorizing high level or hacking the details.
-              </li>
-              <li>
-                He is curious about software engineering, best practices, new
-                ideas; never stop learning. That requires a lot of will. Kudos!
-              </li>
-            </ol>
-          </blockquote>
-          <div class="ref-name">
-            <p>
-              <a href="https://www.linkedin.com/in/igorspasic">Igor Spasić</a>
-            </p>
-          </div>
-        </div>
-        <div class="ref-block">
-          <blockquote>
-            <p>
-              I had a pleasure to work closely with Kyle about 1 year. During
-              this time I was continuously impressed by his deepest expertise in
-              JS and related tech stack. Kyle's knowledge of JS eco-system and
-              tools was incredibly useful for our project. He uses top-notch
-              practices and tools and is super-innovative. Thanks to that we
-              continuously were rising our efficiency as the team and code
-              quality we produce. It feels at the very beginning he has enormous
-              experience in building complex apps and use of various tools,
-              patterns, approaches, architectures etc. Kyle is really good team
-              player! He invests so much time in building a skilled team around
-              himself and I was so excited to learn so much from him. It's, to
-              be honest, was one of the coolest things at my work. I enjoyed
-              working with him and hopefully will have a chance to cooperate in
-              the future.
-            </p>
-          </blockquote>
-          <div class="ref-name">
-            <p>
-              <a href="https://www.linkedin.com/in/oleg-buiar">Oleg Buiar</a>
-            </p>
-          </div>
-        </div>
-      </section>
+  <!-- Header -->
+  <header class="header" data-initials="KC">
+    <div class="header-prompt">whoami<span class="cursor"></span></div>
+    <div class="name">Kyle Chamberlain</div>
+    <div class="label">Software Engineer</div>
+    <div class="contact-line">
+      <a href="mailto:kyle.chamberlain@proton.me">kyle.chamberlain@proton.me</a>
+      <span>(614) 296-3489</span>
+      
+      <span>Columbus, OH, US</span>
     </div>
-  </body>
-</html>
+    <div class="profiles-line"><a href="https://github.com/koleok" class="profile-link" target="_blank" rel="noopener"><span class="profile-network">github</span><span class="profile-username">/koleok</span></a><a href="https://www.linkedin.com/in/koleok" class="profile-link" target="_blank" rel="noopener"><span class="profile-network">linkedin</span><span class="profile-username">/koleok</span></a></div>
+    <div class="summary-block"><p>Veteran engineer building AI-native products — knowledge graphs, RAG systems, and intelligent search. Designs and ships TS SDKs, high-scale data pipelines, and internal tooling that supercharges DX</p></div>
+  </header>
 
+  <!-- Main content -->
+  
+    <section class="section">
+      <div class="section-header">
+        <span class="section-marker">~/</span><h2>Skills</h2>
+        <span class="section-line"></span>
+      </div>
+      <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-name">Applied AI</div>
+      <div class="skill-level" data-level="master">Master</div>
+      <div class="skill-tags"><span class="tag">knowledge graph</span><span class="tag">agentic tooling</span><span class="tag">vector search</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">Rust</div>
+      <div class="skill-level" data-level="advanced">Advanced</div>
+      <div class="skill-tags"><span class="tag">embedded</span><span class="tag">performance</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">TS/JS Node/Browser/Edge</div>
+      <div class="skill-level" data-level="master">Master</div>
+      <div class="skill-tags"><span class="tag">typescript</span><span class="tag">javscript</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">React/Svelte</div>
+      <div class="skill-level" data-level="master">Master</div>
+      <div class="skill-tags"><span class="tag">typescript</span><span class="tag">frontend</span><span class="tag">javscript</span><span class="tag">html</span><span class="tag">css</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">Software Project Management</div>
+      <div class="skill-level" data-level="advanced">Advanced</div>
+      <div class="skill-tags"><span class="tag">Architecture</span><span class="tag">Remote teams</span><span class="tag">Planning</span></div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-name">Distributed Systems</div>
+      <div class="skill-level" data-level="master">Master</div>
+      <div class="skill-tags"><span class="tag">queue</span><span class="tag">CQRS</span><span class="tag">microservices</span><span class="tag">dsl</span></div>
+    </div></div>
+    </section>
+  
+    <section class="section">
+      <div class="section-header">
+        <span class="section-marker">~/</span><h2>Work</h2>
+        <span class="section-line"></span>
+      </div>
+      
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Mar 2025 — Present</span>
+      </div>
+      <div class="entry-sub">Later | Staff Software Engineer (Applied AI)</div>
+      <div class="entry-url"><a href="https://later.com" target="_blank" rel="noopener">https://later.com</a></div>
+      <div class="entry-summary"><p>Build <a href="https://www.prnewswire.com/news-releases/introducing-later-edgeai-the-industrys-most-advanced-predictive-intelligence-solution-302596310.html">EdgeAi</a> flagship influencer marketing tool from scratch</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Lead AI usage strategy, reference architecture, and product design for AI tooling that spans the surface area of Later.com services</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Design and build enterprise knowledge graph system with high-scale parallel ingest that runs 10x faster than systems of it's kind and is drastically cheaper to run</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Design and build advanced search and applied AI service automation on top of novel knowledge graph system</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Jun 2016 — Present</span>
+      </div>
+      <div class="entry-sub">Modweb | Partner / Engineer</div>
+      <div class="entry-url"><a href="https://modweb.io" target="_blank" rel="noopener">https://modweb.io</a></div>
+      <div class="entry-summary"><p>Mentor, design, implement complex systems for a variety of clients, also hands-on manage remote teams</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Design and implement <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">RAG</a> system that consumes many datasources for large organization, access sold as subscription to both data providers and chat consumers</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Design and implement slack <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">RAG</a> chatbots that pull augmentation data from git history, slack conversations, and SDK documentation</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Design and implement batch processing / event sourcing pipeline to address show-stopping scalability problems at cyber security startup which unlocked new clients and revenue</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Migrated property management firm from legacy .NET monolith to GraphQL-orchestrated services with web app, react-native app, and SMS chatbot (Amazon Lex)</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Technologies: JS/TS, Graphql, Node.js, Python, React, Redux, AWS, <a href="https://aws.amazon.com/lex/">Amazon Lex</a>, <a href="https://www.twilio.com/">Twilio</a>, <a href="https://aws.amazon.com/kinesis/">Amazon Kinesis</a></p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Clients include: Moody Analytics, gloo.us, The United Nations, A.Anthony Corp and many MVP mobile and web products for early stage startups</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Sep 2024 — Mar 2025</span>
+      </div>
+      <div class="entry-sub">Ephemera | Staff Software Engineer</div>
+      <div class="entry-url"><a href="https://ephemerahq.com" target="_blank" rel="noopener">https://ephemerahq.com</a></div>
+      <div class="entry-summary"><p>Built <a href="https://converse.xyz/">Converse</a> the flagship xmtp reference application, recently acquired by Ephemera.</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Redesigned Converse app's auth system to use asymmetric device signature strategy and platform app integrity checks</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Built transaction simulation backend for Converse</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Aug 2023 — Sep 2024</span>
+      </div>
+      <div class="entry-sub">Privy (Aquired by Stripe) | Founding Staff Engineer</div>
+      <div class="entry-url"><a href="https://privy.io" target="_blank" rel="noopener">https://privy.io</a></div>
+      <div class="entry-summary"><p>Built SDKs from scratch that 12x'd revenue, and brought the Privy toolset to a new class of developers</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Designed, built, and shipped Expo and Swift SDKs</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Worked closely with high profile customers on complex integrations</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Raised engineering bar by establishing testing practices and crafting world class internal DX</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Technologies: React, Typescript, Node, React native / expo, Postgres, Ethereum, Solana, vercel</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Apr 2022 — Aug 2023</span>
+      </div>
+      <div class="entry-sub">Heir Labs | Founding Principal Engineer</div>
+      <div class="entry-url"><a href="https://heir.app" target="_blank" rel="noopener">https://heir.app</a></div>
+      <div class="entry-summary"><p>Worked closely with product and mentored small team of engineers in planning, architecture, and development of a solana NFT based <a href="https://heir.app">fan engagement platform.</a> founded by Jeffrey Michael Jordan and backed by Michael Jordan / Thrive / Tiger Global</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Took ownership of existing web app architecture</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Oversaw product integrations with magic eden, moonpay, fortress api, and solana labs</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Technologies: React, Typescript, Node, React native / expo, Postgres, serverless on AWS, Solana network, vercel, contentful / payload CMS, magic.link auth</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Oct 2020 — Apr 2022</span>
+      </div>
+      <div class="entry-sub">Filevine | Lead Senior Engineer</div>
+      <div class="entry-url"><a href="https://filevine.com" target="_blank" rel="noopener">https://filevine.com</a></div>
+      <div class="entry-summary"><p>Led a team in the planning, design, and implementation of customizable dashboard feature in flagship <a href="https://app.filevine.com">filevine product</a></p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Designed multi tenant compatible project architecture and sought stakeholder consensus</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Managed team of api, ui, design and infrastructure specialists</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Implemented microservice API and pioneered org usage of <a href="https://micro-frontends.org/">micro-frontends</a> with a standalone <a href="https://svelte.dev/">Svelte</a> app rendered into an existing legacy monolith</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Took ownership of both internal and user facing business intelligence products</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Technologies: Typescript, Node, C#/.NET, Graphql, <a href="https://wundergraph.com/">Wundergraph</a>, Python, Svelte, <a href="https://xstate.js.org/docs/">Xstate</a>, AWS</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Jan 2019 — Oct 2020</span>
+      </div>
+      <div class="entry-sub">Mokriya | Senior Engineer</div>
+      <div class="entry-url"><a href="https://www.nagarro.com/en" target="_blank" rel="noopener">https://www.nagarro.com/en</a></div>
+      <div class="entry-summary"><p>Mentored developers, contributed expertise to system design</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Worked exclusively for <a href="https://www.rms.com">RMS</a> building <a href="https://www.rms.com/risk-intelligence/exposureiq">ExposureIQ</a>, a platform for risk portfolio analysts</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Built on and integrated a Java GraphQl backend which stitched together a vast list of microservices across org ecosystem</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Technologies: JavaScript, Java, Groovy, Graphql, Node.js, React, Redux, Ramda, AWS</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Oct 2015 — Sep 2016</span>
+      </div>
+      <div class="entry-sub">Crosschx | Software Engineer</div>
+      <div class="entry-url"><a href="https://oliveai.com" target="_blank" rel="noopener">https://oliveai.com</a></div>
+      <div class="entry-summary"><p>Built and supported large scale suite of production apps used by hospital registrars to check patients in and reconcile their identity against past duplicates. Technologies: JavaScript, Java, PHP, Graphql, OrientDB, MongoDB, MySQL, Node.js, AngularJs, React, React-Native, Cordova, Redux, Ramda, D3, Spring framework.</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Built flagship waiting room queue product and internal analytics/user management tools</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Experimented with custom drivers for fingerprint reader hardware</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Jan 2014 — Oct 2015</span>
+      </div>
+      <div class="entry-sub">AirWaves Inc | Lead Software Engineer</div>
+      <div class="entry-url"><a href="https://airwavesinc.com" target="_blank" rel="noopener">https://airwavesinc.com</a></div>
+      <div class="entry-summary"><p>Built software for production shipping floor with 50+ employees. Technologies: C#, JavaScript, SQL, MongoDB, Meteor, Node.js, AngularJs, KnockoutJs, fabricJs, .NET, LINQ, underscore/lodash, MsSQL, SAP</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Built async web-services to aggregate, transform, and monitor order data from ecommerce endpoints</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Built artist automation for personalized art processing with ImageMagick/GraphicsMagick and Adobe COM libraries</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Built Shopify/Magento fulfilment plugins with CRUD, product translation, billing, and automated order workflows</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Apr 2012 — Jan 2014</span>
+      </div>
+      <div class="entry-sub">DariFill | Engineer</div>
+      <div class="entry-url"><a href="https://www.darifill.com" target="_blank" rel="noopener">https://www.darifill.com</a></div>
+      <div class="entry-summary"><p>Worked with small team (6 engineers) to create and support large scale automated filling and packaging machines for the dairy industry. Technologies: C#, C++, VB.NET, JavaScript, Allen Bradley family of products, Visual Studio, Excel, Solidworks, MySQL, Microsoft Projects, Machine automation controls, Gantt project management</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Built controls software and extensive documentation for machines</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Designed and maintained CRM for tracking customer interactions, bug fixes, mechanical fixes, and field service history</p></span></li><li><span class="bullet">▸</span><span class="highlight-text"><p>Extensive 3d modeling and fabrication ready drafting with Solidworks</p></span></li></ul>
+    </div>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"></span>
+        <span class="entry-meta">Apr 2009 — May 2011</span>
+      </div>
+      <div class="entry-sub">Sound Living | Systems Designer</div>
+      
+      <div class="entry-summary"><p>Designed control room racks for thermal efficiency and minimized current consumption. Technologies: C, proprietary OEM languages, AutoCad, networking tools, IR programming, Residential and Commercial home automation, whole estate</p></div>
+      <ul class="highlights"><li><span class="bullet">▸</span><span class="highlight-text"><p>Developed proprietary motion tracking and logging software for security systems based on common video input and OpenCV libraries</p></span></li></ul>
+    </div>
+    </section>
+  
+    <section class="section">
+      <div class="section-header">
+        <span class="section-marker">~/</span><h2>Education</h2>
+        <span class="section-line"></span>
+      </div>
+      
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">SAIC</span>
+        <span class="entry-meta">May 2007 — May 2011</span>
+      </div>
+      <div class="entry-sub">BFA <span class="dim">in Programming, digital circuit design, fabrication</span></div>
+      <div class="courses">Courses: <span class="tag">Taught programming, and digital circuit design courses</span><span class="tag">Oversaw operation for robotics/kinetics lab and machine shop</span></div>
+    </div>
+    </section>
+  
+  
+  
+  
+  
+  
+    <section class="section">
+      <div class="section-header">
+        <span class="section-marker">~/</span><h2>Interests</h2>
+        <span class="section-line"></span>
+      </div>
+      <div class="inline-list"><span class="interest-item">Music <span class="dim">[score composition, song writing, plays 20+ musical instruments]</span></span><span class="interest-item">Alternative investing <span class="dim">[developing of trading algorithms, retail currency/commodity trading, real estate, options trading]</span></span><span class="interest-item">All things DIY fabrication <span class="dim">[cnc, laser cutters, woodworking, machining]</span></span><span class="interest-item">Long distance hiking <span class="dim">[Pacific crest trail]</span></span></div>
+    </section>
+  
+    <section class="section">
+      <div class="section-header">
+        <span class="section-marker">~/</span><h2>References</h2>
+        <span class="section-line"></span>
+      </div>
+      <div class="ref-block"><blockquote><p>I worked directly with Kyle on a complex, high priority client project for 1.5 years. Kyle always showed great attention to detail, patience, and initiative in working through complex issues and often unclear requirements. Kyle has extensive experience and a very well rounded skillset. I wouldn't hesitate to recommend Kyle if you are looking to build a high performing software development team.</p></blockquote><div class="ref-name"><p><a href="https://www.linkedin.com/in/evanhein">Evan Hein</a></p></div></div><div class="ref-block"><blockquote><p>Two impressions I got about Kyle:</p>
+<ol>
+<li>His knowledge is extensive. We were often discussing technical aspects of the project that require a broad understanding of various technologies and practices, both front-end and back-end, theorizing high level or hacking the details.</li>
+<li>He is curious about software engineering, best practices, new ideas; never stop learning. That requires a lot of will. Kudos!</li>
+</ol></blockquote><div class="ref-name"><p><a href="https://www.linkedin.com/in/igorspasic">Igor Spasić</a></p></div></div><div class="ref-block"><blockquote><p>I had a pleasure to work closely with Kyle about 1 year. During this time I was continuously impressed by his deepest expertise in JS and related tech stack.
+Kyle's knowledge of JS eco-system and tools was incredibly useful for our project. He uses top-notch practices and tools and is super-innovative. Thanks to that we continuously were rising our efficiency as the team and code quality we produce.
+It feels at the very beginning he has enormous experience in building complex apps and use of various tools, patterns, approaches, architectures etc.
+Kyle is really good team player! He invests so much time in building a skilled team around himself and I was so excited to learn so much from him. It's, to be honest, was one of the coolest things at my work.
+I enjoyed working with him and hopefully will have a chance to cooperate in the future.</p></blockquote><div class="ref-name"><p><a href="https://www.linkedin.com/in/oleg-buiar">Oleg Buiar</a></p></div></div>
+    </section>
+
+</div>
+</body>
+</html>
