@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kyle Chamberlain — Résumé</title>
+    <style>
+      /* ── Reset ── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --font: "IBM Plex Mono", "SF Mono", "Cascadia Code", Consolas,
+          "Courier New", monospace;
+        --c-title: #111;
+        --c-text: #222;
+        --c-dim: #555;
+        --c-line: #999;
+        --c-bg: #fff;
+        --c-accent: #1a6;
+      }
+
+      html {
+        font-size: 11px;
+      }
+
+      body {
+        font-family: var(--font);
+        font-size: 1rem;
+        color: var(--c-text);
+        background: var(--c-bg);
+        line-height: 1.35;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ── Two-column layout ── */
+      .page {
+        display: flex;
+        max-width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(to right, #f7f8f9 21%, #fff 21%);
+      }
+
+      .sidebar {
+        width: 21%;
+        padding: 1.6rem 1.4rem 2rem;
+      }
+
+      .main {
+        flex: 1;
+        padding: 1.6rem 2rem 2rem;
+        min-width: 0;
+        border-left: 1px solid #ddd;
+      }
+
+      /* ── Sidebar ── */
+      .sb-section {
+        margin-bottom: 1.2rem;
+      }
+      .sb-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--c-title);
+        letter-spacing: 0.06em;
+        border-bottom: 1px solid var(--c-line);
+        padding-bottom: 0.2rem;
+        margin-bottom: 0.4rem;
+      }
+      .sb-item {
+        font-size: 0.88rem;
+        color: var(--c-dim);
+        margin-bottom: 0.15rem;
+        word-break: break-all;
+      }
+      .sb-dim {
+        color: #999;
+      }
+      .sb-summary {
+        font-size: 0.88rem;
+        color: var(--c-text);
+        line-height: 1.38;
+      }
+      .sb-summary p {
+        margin-bottom: 0.2rem;
+      }
+      .sb-summary p:last-child {
+        margin-bottom: 0;
+      }
+
+      .sb-skill {
+        margin-bottom: 0.4rem;
+      }
+      .sb-skill-name {
+        display: block;
+        font-size: 0.92rem;
+        color: var(--c-title);
+        font-weight: 600;
+      }
+      .sb-skill-kw {
+        display: block;
+        font-size: 0.82rem;
+        color: var(--c-dim);
+        line-height: 1.25;
+      }
+
+      .sb-edu {
+        margin-bottom: 0.4rem;
+      }
+      .sb-edu-school {
+        font-size: 0.92rem;
+        color: var(--c-title);
+        font-weight: 600;
+      }
+      .sb-edu-detail {
+        font-size: 0.85rem;
+        color: var(--c-dim);
+      }
+
+      /* ── Main sections ── */
+      .mc-section {
+        margin-bottom: 1.2rem;
+      }
+      .mc-section-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--c-title);
+        letter-spacing: 0.06em;
+        border-bottom: 1px solid var(--c-line);
+        padding-bottom: 0.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ── Entries ── */
+      .entry {
+        margin-bottom: 0.7rem;
+        break-inside: avoid;
+      }
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+      }
+      .entry-role {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--c-title);
+      }
+      .entry-dates {
+        font-size: 0.85rem;
+        color: var(--c-dim);
+        white-space: nowrap;
+      }
+      .entry-org {
+        font-size: 0.9rem;
+        color: var(--c-accent);
+        margin-bottom: 0.2rem;
+      }
+      .entry-desc {
+        font-size: 0.9rem;
+        color: var(--c-text);
+        margin-bottom: 0.2rem;
+        line-height: 1.35;
+      }
+      .entry-desc p {
+        margin-bottom: 0.2rem;
+      }
+      .entry-desc p:last-child {
+        margin-bottom: 0;
+      }
+      .entry-desc ul,
+      .entry-desc ol {
+        margin-left: 1.4rem;
+        margin-bottom: 0.3rem;
+      }
+      .entry-desc li {
+        margin-bottom: 0.1rem;
+      }
+      .entry-desc code {
+        font-family: var(--font);
+        font-size: 0.88rem;
+        background: #eef1f3;
+        padding: 0 0.2rem;
+      }
+      .entry-desc a {
+        color: var(--c-accent);
+        text-decoration: underline;
+      }
+
+      /* Highlights */
+      .hl {
+        list-style: none;
+        padding: 0;
+      }
+      .hl li {
+        font-size: 0.9rem;
+        color: var(--c-text);
+        padding: 0.04rem 0;
+        position: relative;
+        padding-left: 0.9rem;
+        line-height: 1.35;
+      }
+      .hl li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--c-accent);
+        font-size: 0.82rem;
+      }
+      .hl li p {
+        margin: 0;
+        display: inline;
+      }
+      .hl a {
+        color: var(--c-accent);
+        text-decoration: underline;
+      }
+      .hl code {
+        font-family: var(--font);
+        font-size: 0.88rem;
+        background: #eef1f3;
+        padding: 0 0.2rem;
+      }
+
+      /* Tags */
+      .tags {
+        margin-top: 0.3rem;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 0.78rem;
+        color: var(--c-accent);
+        border: 1px solid #b8d4cc;
+        padding: 0.05rem 0.4rem;
+        margin-right: 0.3rem;
+        margin-bottom: 0.2rem;
+      }
+
+      /* ── Print ── */
+      @media print {
+        @page {
+          margin: 0.4cm;
+          size: letter;
+        }
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .page {
+          min-height: auto;
+        }
+        .sidebar {
+          width: 21%;
+          min-width: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          flex-direction: column;
+          background: #fff;
+        }
+        .sidebar {
+          width: 100%;
+          background: #f7f8f9;
+          border-right: none;
+          border-bottom: 1px solid #ddd;
+          padding: 1.5rem;
+        }
+        .main {
+          padding: 1.5rem;
+          border-left: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <aside class="sidebar">
+        <div class="sb-section" style="margin-bottom: 1.8rem">
+          <div
+            style="
+              font-size: 1.8rem;
+              font-weight: 700;
+              color: var(--c-title);
+              letter-spacing: 0.03em;
+            "
+          >
+            Kyle Chamberlain
+          </div>
+          <div
+            style="font-size: 1rem; color: var(--c-accent); margin-top: 0.15rem"
+          >
+            Software Engineer
+          </div>
+        </div>
+        <div class="sb-section">
+          <div class="sb-title">CONTACT</div>
+          <div class="sb-item">kyle.chamberlain@proton.me</div>
+          <div class="sb-item">(614) 296-3489</div>
+          <div class="sb-item">Columbus, OH, US</div>
+          <div class="sb-item">
+            <a href="https://github.com/koleok">github/koleok</a>
+          </div>
+          <div class="sb-item">
+            <a href="https://www.linkedin.com/in/koleok">linkedin/koleok</a>
+          </div>
+        </div>
+        <div class="sb-section">
+          <div class="sb-title">SUMMARY</div>
+          <div class="sb-summary">
+            <p>
+              Veteran engineer building AI-native products — knowledge graphs,
+              RAG systems, and intelligent search. Designs and ships SDKs,
+              high-scale data pipelines, and innovative AI tooling
+            </p>
+          </div>
+        </div>
+        <div class="sb-section">
+          <div class="sb-title">SKILLS</div>
+          <div class="sb-skill">
+            <span class="sb-skill-name">Applied AI</span>
+            <span class="sb-skill-kw"
+              >knowledge graph, agentic tooling, vector search</span
+            >
+          </div>
+          <div class="sb-skill">
+            <span class="sb-skill-name">Rust</span>
+            <span class="sb-skill-kw">embedded, performance</span>
+          </div>
+          <div class="sb-skill">
+            <span class="sb-skill-name">TS/JS Node/Browser/Edge</span>
+            <span class="sb-skill-kw">typescript, javscript</span>
+          </div>
+          <div class="sb-skill">
+            <span class="sb-skill-name">React/Svelte</span>
+            <span class="sb-skill-kw"
+              >typescript, frontend, javscript, html, css</span
+            >
+          </div>
+          <div class="sb-skill">
+            <span class="sb-skill-name">Software Project Management</span>
+            <span class="sb-skill-kw"
+              >Architecture, Remote teams, Planning</span
+            >
+          </div>
+          <div class="sb-skill">
+            <span class="sb-skill-name">Distributed Systems</span>
+            <span class="sb-skill-kw">queue, CQRS, microservices, dsl</span>
+          </div>
+        </div>
+        <div class="sb-section">
+          <div class="sb-title">EDUCATION</div>
+          <div class="sb-edu">
+            <div class="sb-edu-school">SAIC</div>
+            <div class="sb-edu-detail">
+              BFA, Programming, digital circuit design, fabrication
+            </div>
+            <div class="sb-edu-detail">May 2007 — May 2011</div>
+          </div>
+        </div>
+      </aside>
+      <main class="main">
+        <div class="mc-section">
+          <div class="mc-section-title">EXPERIENCE</div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role"
+                >Staff Software Engineer (Applied AI)</span
+              >
+              <span class="entry-dates">Mar 2025 — Present</span>
+            </div>
+            <div class="entry-org">Later</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Lead AI usage strategy, reference architecture, and product
+                  design for AI tooling that spans the surface area of Later.com
+                  services
+                </p>
+              </li>
+              <li>
+                <p>
+                  Design and build enterprise knowledge graph system with
+                  high-scale parallel ingest that runs 10x faster than systems
+                  of it's kind and is drastically cheaper to run
+                </p>
+              </li>
+              <li>
+                <p>
+                  Design and build advanced search and applied AI service
+                  automation on top of novel knowledge graph system
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Partner / Engineer</span>
+              <span class="entry-dates">Jun 2016 — Present</span>
+            </div>
+            <div class="entry-org">Modweb</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Design and implement
+                  <a
+                    href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation"
+                    >RAG</a
+                  >
+                  system that consumes many datasources for large organization,
+                  access sold as subscription to both data providers and chat
+                  consumers
+                </p>
+              </li>
+              <li>
+                <p>
+                  Design and implement slack
+                  <a
+                    href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation"
+                    >RAG</a
+                  >
+                  chatbots that pull augmentation data from git history, slack
+                  conversations, and SDK documentation
+                </p>
+              </li>
+              <li>
+                <p>
+                  Design and implement batch processing / event sourcing
+                  pipeline to address show-stopping scalability problems at
+                  cyber security startup which unlocked new clients and revenue
+                </p>
+              </li>
+              <li>
+                <p>
+                  Migrated property management firm from legacy .NET monolith to
+                  GraphQL-orchestrated services with web app, react-native app,
+                  and SMS chatbot (Amazon Lex)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: JS/TS, Graphql, Node.js, Python, React, Redux,
+                  AWS, <a href="https://aws.amazon.com/lex/">Amazon Lex</a>,
+                  <a href="https://www.twilio.com/">Twilio</a>,
+                  <a href="https://aws.amazon.com/kinesis/">Amazon Kinesis</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Clients include: Moody Analytics, gloo.us, The United Nations,
+                  A.Anthony Corp and many MVP mobile and web products for early
+                  stage startups
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Staff Software Engineer</span>
+              <span class="entry-dates">Sep 2024 — Mar 2025</span>
+            </div>
+            <div class="entry-org">Ephemera</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Redesigned Converse app's auth system to use asymmetric device
+                  signature strategy and platform app integrity checks
+                </p>
+              </li>
+              <li><p>Built transaction simulation backend for Converse</p></li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Founding Staff Engineer</span>
+              <span class="entry-dates">Aug 2023 — Sep 2024</span>
+            </div>
+            <div class="entry-org">Privy (Aquired by Stripe)</div>
+            <ul class="hl">
+              <li><p>Designed, built, and shipped Expo and Swift SDKs</p></li>
+              <li>
+                <p>
+                  Worked closely with high profile customers on complex
+                  integrations
+                </p>
+              </li>
+              <li>
+                <p>
+                  Raised engineering bar by establishing testing practices and
+                  crafting world class internal DX
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: React, Typescript, Node, React native / expo,
+                  Postgres, Ethereum, Solana, vercel
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Founding Principal Engineer</span>
+              <span class="entry-dates">Apr 2022 — Aug 2023</span>
+            </div>
+            <div class="entry-org">Heir Labs</div>
+            <ul class="hl">
+              <li><p>Took ownership of existing web app architecture</p></li>
+              <li>
+                <p>
+                  Oversaw product integrations with magic eden, moonpay,
+                  fortress api, and solana labs
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: React, Typescript, Node, React native / expo,
+                  Postgres, serverless on AWS, Solana network, vercel,
+                  contentful / payload CMS, magic.link auth
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Lead Senior Engineer</span>
+              <span class="entry-dates">Oct 2020 — Apr 2022</span>
+            </div>
+            <div class="entry-org">Filevine</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Designed multi tenant compatible project architecture and
+                  sought stakeholder consensus
+                </p>
+              </li>
+              <li>
+                <p>
+                  Managed team of api, ui, design and infrastructure specialists
+                </p>
+              </li>
+              <li>
+                <p>
+                  Implemented microservice API and pioneered org usage of
+                  <a href="https://micro-frontends.org/">micro-frontends</a>
+                  with a standalone <a href="https://svelte.dev/">Svelte</a> app
+                  rendered into an existing legacy monolith
+                </p>
+              </li>
+              <li>
+                <p>
+                  Took ownership of both internal and user facing business
+                  intelligence products
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: Typescript, Node, C#/.NET, Graphql,
+                  <a href="https://wundergraph.com/">Wundergraph</a>, Python,
+                  Svelte, <a href="https://xstate.js.org/docs/">Xstate</a>, AWS
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Senior Engineer</span>
+              <span class="entry-dates">Jan 2019 — Oct 2020</span>
+            </div>
+            <div class="entry-org">Mokriya</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Worked exclusively for
+                  <a href="https://www.rms.com">RMS</a> building
+                  <a href="https://www.rms.com/risk-intelligence/exposureiq"
+                    >ExposureIQ</a
+                  >, a platform for risk portfolio analysts
+                </p>
+              </li>
+              <li>
+                <p>
+                  Built on and integrated a Java GraphQl backend which stitched
+                  together a vast list of microservices across org ecosystem
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: JavaScript, Java, Groovy, Graphql, Node.js,
+                  React, Redux, Ramda, AWS
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Software Engineer</span>
+              <span class="entry-dates">Oct 2015 — Sep 2016</span>
+            </div>
+            <div class="entry-org">Crosschx</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Built flagship waiting room queue product and internal
+                  analytics/user management tools
+                </p>
+              </li>
+              <li>
+                <p>
+                  Experimented with custom drivers for fingerprint reader
+                  hardware
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Lead Software Engineer</span>
+              <span class="entry-dates">Jan 2014 — Oct 2015</span>
+            </div>
+            <div class="entry-org">AirWaves Inc</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Built async web-services to aggregate, transform, and monitor
+                  order data from ecommerce endpoints
+                </p>
+              </li>
+              <li>
+                <p>
+                  Built artist automation for personalized art processing with
+                  ImageMagick/GraphicsMagick and Adobe COM libraries
+                </p>
+              </li>
+              <li>
+                <p>
+                  Built Shopify/Magento fulfilment plugins with CRUD, product
+                  translation, billing, and automated order workflows
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Engineer</span>
+              <span class="entry-dates">Apr 2012 — Jan 2014</span>
+            </div>
+            <div class="entry-org">DariFill</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Built controls software and extensive documentation for
+                  machines
+                </p>
+              </li>
+              <li>
+                <p>
+                  Designed and maintained CRM for tracking customer
+                  interactions, bug fixes, mechanical fixes, and field service
+                  history
+                </p>
+              </li>
+              <li>
+                <p>
+                  Extensive 3d modeling and fabrication ready drafting with
+                  Solidworks
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-role">Systems Designer</span>
+              <span class="entry-dates">Apr 2009 — May 2011</span>
+            </div>
+            <div class="entry-org">Sound Living</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Developed proprietary motion tracking and logging software for
+                  security systems based on common video input and OpenCV
+                  libraries
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      (function () {
+        var base = 11;
+        var el = document.documentElement;
+        el.style.fontSize = base + "px";
+
+        function fit() {
+          var page = document.querySelector(".page");
+          if (!page) return;
+          var h = page.scrollHeight;
+          var target = 980;
+          if (h > 0 && h < target) {
+            var scale = Math.min(target / h, 1.35);
+            el.style.fontSize = (base * scale).toFixed(2) + "px";
+          }
+        }
+
+        function reset() {
+          el.style.fontSize = base + "px";
+        }
+
+        var mql = window.matchMedia("print");
+        if (mql.addEventListener) {
+          mql.addEventListener("change", function (e) {
+            e.matches ? fit() : reset();
+          });
+        }
+        window.addEventListener("beforeprint", fit);
+        window.addEventListener("afterprint", reset);
+      })();
+    </script>
+  </body>
+</html>
+
