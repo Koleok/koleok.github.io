@@ -2,6 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Veteran engineer building AI-native products — knowledge graphs, RAG systems, and intelligent search. Designs and ships SDKs, high-scale data pipelines, and innovative AI tooling"
+    />
+    <meta property="og:title" content="Kyle Chamberlain — Résumé" />
+    <meta
+      property="og:description"
+      content="Veteran engineer building AI-native products — knowledge graphs, RAG systems, and intelligent search. Designs and ships SDKs, high-scale data pipelines, and innovative AI tooling"
+    />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://koleok.github.io" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Kyle Chamberlain — Résumé" />
+    <meta
+      name="twitter:description"
+      content="Veteran engineer building AI-native products — knowledge graphs, RAG systems, and intelligent search. Designs and ships SDKs, high-scale data pipelines, and innovative AI tooling"
+    />
     <title>Kyle Chamberlain — Résumé</title>
     <style>
       /* ── Reset ── */
@@ -251,6 +269,11 @@
       }
 
       /* ── Print ── */
+      @media screen {
+        .print-only {
+          display: none;
+        }
+      }
       @media print {
         @page {
           margin: 0.4cm;
@@ -269,6 +292,22 @@
         .sidebar {
           width: 21%;
           min-width: 0;
+        }
+        .entry[data-work] {
+          display: none;
+        }
+        .entry[data-work="0"],
+        .entry[data-work="1"],
+        .entry[data-work="2"],
+        .entry[data-work="3"],
+        .entry[data-work="4"],
+        .entry[data-work="5"],
+        .entry[data-work="6"],
+        .entry[data-work="7"] {
+          display: block;
+        }
+        .print-only {
+          display: block;
         }
       }
 
@@ -380,7 +419,7 @@
       <main class="main">
         <div class="mc-section">
           <div class="mc-section-title">EXPERIENCE</div>
-          <div class="entry">
+          <div class="entry" data-work="0">
             <div class="entry-head">
               <span class="entry-role"
                 >Staff Software Engineer (Applied AI)</span
@@ -411,7 +450,145 @@
               </li>
             </ul>
           </div>
-          <div class="entry">
+          <div class="entry" data-work="1">
+            <div class="entry-head">
+              <span class="entry-role">Staff Software Engineer</span>
+              <span class="entry-dates">Sep 2024 — Mar 2025</span>
+            </div>
+            <div class="entry-org">Ephemera</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Redesigned Converse app's auth system to use asymmetric device
+                  signature strategy and platform app integrity checks
+                </p>
+              </li>
+              <li><p>Built transaction simulation backend for Converse</p></li>
+            </ul>
+          </div>
+          <div class="entry" data-work="2">
+            <div class="entry-head">
+              <span class="entry-role">Founding Staff Engineer</span>
+              <span class="entry-dates">Aug 2023 — Sep 2024</span>
+            </div>
+            <div class="entry-org">Privy (Aquired by Stripe)</div>
+            <ul class="hl">
+              <li><p>Designed, built, and shipped Expo and Swift SDKs</p></li>
+              <li>
+                <p>
+                  Worked closely with high profile customers on complex
+                  integrations
+                </p>
+              </li>
+              <li>
+                <p>
+                  Raised engineering bar by establishing testing practices and
+                  crafting world class internal DX
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: React, Typescript, Node, React native / expo,
+                  Postgres, Ethereum, Solana, vercel
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry" data-work="3">
+            <div class="entry-head">
+              <span class="entry-role">Founding Principal Engineer</span>
+              <span class="entry-dates">Apr 2022 — Aug 2023</span>
+            </div>
+            <div class="entry-org">Heir Labs</div>
+            <ul class="hl">
+              <li><p>Took ownership of existing web app architecture</p></li>
+              <li>
+                <p>
+                  Oversaw product integrations with magic eden, moonpay,
+                  fortress api, and solana labs
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: React, Typescript, Node, React native / expo,
+                  Postgres, serverless on AWS, Solana network, vercel,
+                  contentful / payload CMS, magic.link auth
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry" data-work="4">
+            <div class="entry-head">
+              <span class="entry-role">Lead Senior Engineer</span>
+              <span class="entry-dates">Oct 2020 — Apr 2022</span>
+            </div>
+            <div class="entry-org">Filevine</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Designed multi tenant compatible project architecture and
+                  sought stakeholder consensus
+                </p>
+              </li>
+              <li>
+                <p>
+                  Managed team of api, ui, design and infrastructure specialists
+                </p>
+              </li>
+              <li>
+                <p>
+                  Implemented microservice API and pioneered org usage of
+                  <a href="https://micro-frontends.org/">micro-frontends</a>
+                  with a standalone <a href="https://svelte.dev/">Svelte</a> app
+                  rendered into an existing legacy monolith
+                </p>
+              </li>
+              <li>
+                <p>
+                  Took ownership of both internal and user facing business
+                  intelligence products
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: Typescript, Node, C#/.NET, Graphql,
+                  <a href="https://wundergraph.com/">Wundergraph</a>, Python,
+                  Svelte, <a href="https://xstate.js.org/docs/">Xstate</a>, AWS
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry" data-work="5">
+            <div class="entry-head">
+              <span class="entry-role">Senior Engineer</span>
+              <span class="entry-dates">Jan 2019 — Oct 2020</span>
+            </div>
+            <div class="entry-org">Mokriya</div>
+            <ul class="hl">
+              <li>
+                <p>
+                  Worked exclusively for
+                  <a href="https://www.rms.com">RMS</a> building
+                  <a href="https://www.rms.com/risk-intelligence/exposureiq"
+                    >ExposureIQ</a
+                  >, a platform for risk portfolio analysts
+                </p>
+              </li>
+              <li>
+                <p>
+                  Built on and integrated a Java GraphQl backend which stitched
+                  together a vast list of microservices across org ecosystem
+                </p>
+              </li>
+              <li>
+                <p>
+                  Technologies: JavaScript, Java, Groovy, Graphql, Node.js,
+                  React, Redux, Ramda, AWS
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="entry" data-work="6">
             <div class="entry-head">
               <span class="entry-role">Partner / Engineer</span>
               <span class="entry-dates">Jun 2016 — Present</span>
@@ -472,145 +649,7 @@
               </li>
             </ul>
           </div>
-          <div class="entry">
-            <div class="entry-head">
-              <span class="entry-role">Staff Software Engineer</span>
-              <span class="entry-dates">Sep 2024 — Mar 2025</span>
-            </div>
-            <div class="entry-org">Ephemera</div>
-            <ul class="hl">
-              <li>
-                <p>
-                  Redesigned Converse app's auth system to use asymmetric device
-                  signature strategy and platform app integrity checks
-                </p>
-              </li>
-              <li><p>Built transaction simulation backend for Converse</p></li>
-            </ul>
-          </div>
-          <div class="entry">
-            <div class="entry-head">
-              <span class="entry-role">Founding Staff Engineer</span>
-              <span class="entry-dates">Aug 2023 — Sep 2024</span>
-            </div>
-            <div class="entry-org">Privy (Aquired by Stripe)</div>
-            <ul class="hl">
-              <li><p>Designed, built, and shipped Expo and Swift SDKs</p></li>
-              <li>
-                <p>
-                  Worked closely with high profile customers on complex
-                  integrations
-                </p>
-              </li>
-              <li>
-                <p>
-                  Raised engineering bar by establishing testing practices and
-                  crafting world class internal DX
-                </p>
-              </li>
-              <li>
-                <p>
-                  Technologies: React, Typescript, Node, React native / expo,
-                  Postgres, Ethereum, Solana, vercel
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div class="entry">
-            <div class="entry-head">
-              <span class="entry-role">Founding Principal Engineer</span>
-              <span class="entry-dates">Apr 2022 — Aug 2023</span>
-            </div>
-            <div class="entry-org">Heir Labs</div>
-            <ul class="hl">
-              <li><p>Took ownership of existing web app architecture</p></li>
-              <li>
-                <p>
-                  Oversaw product integrations with magic eden, moonpay,
-                  fortress api, and solana labs
-                </p>
-              </li>
-              <li>
-                <p>
-                  Technologies: React, Typescript, Node, React native / expo,
-                  Postgres, serverless on AWS, Solana network, vercel,
-                  contentful / payload CMS, magic.link auth
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div class="entry">
-            <div class="entry-head">
-              <span class="entry-role">Lead Senior Engineer</span>
-              <span class="entry-dates">Oct 2020 — Apr 2022</span>
-            </div>
-            <div class="entry-org">Filevine</div>
-            <ul class="hl">
-              <li>
-                <p>
-                  Designed multi tenant compatible project architecture and
-                  sought stakeholder consensus
-                </p>
-              </li>
-              <li>
-                <p>
-                  Managed team of api, ui, design and infrastructure specialists
-                </p>
-              </li>
-              <li>
-                <p>
-                  Implemented microservice API and pioneered org usage of
-                  <a href="https://micro-frontends.org/">micro-frontends</a>
-                  with a standalone <a href="https://svelte.dev/">Svelte</a> app
-                  rendered into an existing legacy monolith
-                </p>
-              </li>
-              <li>
-                <p>
-                  Took ownership of both internal and user facing business
-                  intelligence products
-                </p>
-              </li>
-              <li>
-                <p>
-                  Technologies: Typescript, Node, C#/.NET, Graphql,
-                  <a href="https://wundergraph.com/">Wundergraph</a>, Python,
-                  Svelte, <a href="https://xstate.js.org/docs/">Xstate</a>, AWS
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div class="entry">
-            <div class="entry-head">
-              <span class="entry-role">Senior Engineer</span>
-              <span class="entry-dates">Jan 2019 — Oct 2020</span>
-            </div>
-            <div class="entry-org">Mokriya</div>
-            <ul class="hl">
-              <li>
-                <p>
-                  Worked exclusively for
-                  <a href="https://www.rms.com">RMS</a> building
-                  <a href="https://www.rms.com/risk-intelligence/exposureiq"
-                    >ExposureIQ</a
-                  >, a platform for risk portfolio analysts
-                </p>
-              </li>
-              <li>
-                <p>
-                  Built on and integrated a Java GraphQl backend which stitched
-                  together a vast list of microservices across org ecosystem
-                </p>
-              </li>
-              <li>
-                <p>
-                  Technologies: JavaScript, Java, Groovy, Graphql, Node.js,
-                  React, Redux, Ramda, AWS
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div class="entry">
+          <div class="entry" data-work="7">
             <div class="entry-head">
               <span class="entry-role">Software Engineer</span>
               <span class="entry-dates">Oct 2015 — Sep 2016</span>
@@ -631,7 +670,7 @@
               </li>
             </ul>
           </div>
-          <div class="entry">
+          <div class="entry" data-work="8">
             <div class="entry-head">
               <span class="entry-role">Lead Software Engineer</span>
               <span class="entry-dates">Jan 2014 — Oct 2015</span>
@@ -658,7 +697,7 @@
               </li>
             </ul>
           </div>
-          <div class="entry">
+          <div class="entry" data-work="9">
             <div class="entry-head">
               <span class="entry-role">Engineer</span>
               <span class="entry-dates">Apr 2012 — Jan 2014</span>
@@ -686,7 +725,7 @@
               </li>
             </ul>
           </div>
-          <div class="entry">
+          <div class="entry" data-work="10">
             <div class="entry-head">
               <span class="entry-role">Systems Designer</span>
               <span class="entry-dates">Apr 2009 — May 2011</span>
@@ -702,6 +741,24 @@
               </li>
             </ul>
           </div>
+        </div>
+        <div
+          class="print-only"
+          style="
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--c-dim);
+            margin-top: 0.6rem;
+            padding-top: 0.4rem;
+            border-top: 1px solid var(--c-line);
+          "
+        >
+          more at
+          <a
+            href="https://koleok.github.io"
+            style="color: var(--c-accent); text-decoration: underline"
+            >koleok.github.io</a
+          >
         </div>
       </main>
     </div>
@@ -738,4 +795,3 @@
     </script>
   </body>
 </html>
-
